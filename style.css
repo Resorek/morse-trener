@@ -1,4 +1,4 @@
-/* ---------- Kolory: jasny motyw (domyślny) ---------- */
+/* ---------- Colours: light theme (default) ---------- */
 :root {
   color-scheme: light;
   --bg: #f3f5f9;
@@ -51,7 +51,7 @@
   --mono: Consolas, "Cascadia Mono", "Courier New", monospace;
 }
 
-/* ---------- Ciemny motyw: wg systemu albo wymuszony przyciskiem ---------- */
+/* ---------- Dark theme: from the system or forced with the button ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
@@ -172,12 +172,12 @@ kbd {
   color: var(--text);
 }
 
-/* ---------- Zapis kropek i kresek ---------- */
+/* ---------- Dots and dashes ---------- */
 .code { display: inline-flex; align-items: center; gap: .3em; vertical-align: middle; }
 .code i { display: block; width: .34em; height: .34em; border-radius: .17em; background: currentColor; }
 .code i.h { width: 1.05em; }
 
-/* ---------- Panel boczny ---------- */
+/* ---------- Sidebar ---------- */
 .sidebar {
   position: fixed;
   top: 0; bottom: 0; left: 0;
@@ -223,7 +223,7 @@ body.sb-open .sidebar { transform: none; box-shadow: 4px 0 24px rgba(15, 30, 60,
   body.sb-open .backdrop { opacity: 1; pointer-events: auto; }
 }
 
-/* Karta lekcji – jak na obrazku: gradientowy nagłówek + kafelki znaków */
+/* Lesson card – as in the reference: gradient header + character tiles */
 .lesson {
   margin-bottom: 12px;
   background: var(--card);
@@ -266,7 +266,7 @@ body.sb-open .sidebar { transform: none; box-shadow: 4px 0 24px rgba(15, 30, 60,
 .chip .code { font-size: 10px; color: var(--code-muted); height: 6px; }
 .chip:hover { background: var(--chip-hover); border-color: var(--chip-hover-line); }
 
-/* Przełącznik grupy */
+/* Group switch */
 .switch {
   appearance: none;
   -webkit-appearance: none;
@@ -309,7 +309,7 @@ body.sb-open .sidebar { transform: none; box-shadow: 4px 0 24px rgba(15, 30, 60,
 .slider output { color: var(--blue); font-weight: 700; }
 input[type=range] { width: 100%; accent-color: var(--blue); }
 
-/* ---------- Pasek górny ---------- */
+/* ---------- Top bar ---------- */
 .topbar {
   position: sticky;
   top: 0;
@@ -368,7 +368,7 @@ input[type=range] { width: 100%; accent-color: var(--blue); }
 .icon-btn:hover { background: var(--hover); }
 .icon-btn svg { display: block; }
 
-/* ---------- Wspólne ---------- */
+/* ---------- Shared ---------- */
 .content { max-width: 780px; margin: 0 auto; padding: 24px 16px 40px; }
 .card {
   margin-bottom: 18px;
@@ -410,7 +410,7 @@ input[type=range] { width: 100%; accent-color: var(--blue); }
 .hint { margin-top: 16px !important; font-size: 13px; color: var(--muted); }
 .link-btn { padding: 4px; border: 0; background: none; color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer; }
 
-/* ---------- Trening ---------- */
+/* ---------- Practice ---------- */
 .stage { text-align: center; padding-top: 26px; }
 .status { min-height: 26px; font-size: 17px; font-weight: 600; }
 .display {
@@ -555,8 +555,8 @@ input[type=range] { width: 100%; accent-color: var(--blue); }
 .mistake .chip { flex: none; }
 .no-mistakes { color: var(--ok); font-weight: 600; }
 
-/* ---------- Klawiatura ekranowa ---------- */
-/* body.kb-on = tryb klawiatury ekranowej (telefon albo włączona ręcznie) */
+/* ---------- On-screen keyboard ---------- */
+/* body.kb-on = on-screen keyboard mode (phone, or switched on manually) */
 .kb-only { display: none !important; }
 body.kb-on .kb-only { display: revert !important; }
 body.kb-on .no-kb { display: none !important; }
@@ -614,7 +614,7 @@ body.kb-on .no-kb { display: none !important; }
 .key.bad { background: var(--bad); color: #fff; animation: shake .3s; }
 .key svg { flex: none; }
 
-/* Pole odbioru w teście, gdy pisze się klawiaturą ekranową */
+/* Answer field in the test when typing on the on-screen keyboard */
 .copy-mirror {
   min-height: 62px;
   padding: 12px 14px;
@@ -638,7 +638,7 @@ body.kb-on .no-kb { display: none !important; }
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* ---------- Telefon ---------- */
+/* ---------- Phone ---------- */
 @media (max-width: 600px) {
   .content { padding: 12px 10px 20px; }
   .card { padding: 16px; margin-bottom: 12px; border-radius: 12px; }

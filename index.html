@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" id="themeColor" content="#ffffff">
-<title>Trener Morse'a</title>
+<title>Morse Trainer</title>
 <link rel="stylesheet" href="style.css">
 <script>
-  // Motyw ustawiony przed narysowaniem strony – bez mignięcia jasnym tłem
+  // Apply the saved theme before the page is drawn – no flash of the light background
   try {
     var t = JSON.parse(localStorage.getItem('morse-trener.v1') || '{}').theme;
     if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
@@ -16,30 +16,30 @@
 </head>
 <body class="preload">
 
-<!-- Wysuwany panel z grupami znaków -->
-<aside class="sidebar" id="sidebar" aria-label="Grupy znaków">
+<!-- Sliding panel with character groups -->
+<aside class="sidebar" id="sidebar" aria-label="Character groups">
   <div class="sb-head">
     <div>
-      <h2>Grupy znaków</h2>
-      <p class="muted small">Zaznacz lekcje, z których mają być losowane znaki. Kliknij literę, żeby ją odsłuchać.</p>
+      <h2>Character groups</h2>
+      <p class="muted small">Pick the lessons to draw characters from. Click a letter to hear it.</p>
     </div>
-    <button class="icon-btn" id="sbClose" title="Schowaj panel" aria-label="Schowaj panel">&laquo;</button>
+    <button class="icon-btn" id="sbClose" title="Hide panel" aria-label="Hide panel">&laquo;</button>
   </div>
   <div class="sb-scroll">
     <div class="sb-actions">
-      <button class="btn small" id="selAll">Zaznacz wszystkie</button>
-      <button class="btn small" id="selNone">Odznacz wszystkie</button>
+      <button class="btn small" id="selAll">Select all</button>
+      <button class="btn small" id="selNone">Clear all</button>
     </div>
     <div id="lessonList"></div>
     <section class="settings">
-      <h3>Dźwięk</h3>
-      <label class="slider"><span>Prędkość <output id="wpmOut"></output></span><input type="range" id="wpm" min="5" max="40" step="1"></label>
-      <label class="slider"><span>Ton <output id="toneOut"></output></span><input type="range" id="tone" min="400" max="1000" step="10"></label>
-      <label class="slider"><span>Głośność <output id="volumeOut"></output></span><input type="range" id="volume" min="0" max="100" step="1"></label>
+      <h3>Sound</h3>
+      <label class="slider"><span>Speed <output id="wpmOut"></output></span><input type="range" id="wpm" min="5" max="40" step="1"></label>
+      <label class="slider"><span>Tone <output id="toneOut"></output></span><input type="range" id="tone" min="400" max="1000" step="10"></label>
+      <label class="slider"><span>Volume <output id="volumeOut"></output></span><input type="range" id="volume" min="0" max="100" step="1"></label>
       <div class="setting-row">
-        <span>Klawiatura ekranowa</span>
+        <span>On-screen keyboard</span>
         <div class="seg small" id="kbModeSeg">
-          <button data-kb="auto" title="Na urządzeniach dotykowych">Auto</button><button data-kb="on">Wł.</button><button data-kb="off">Wył.</button>
+          <button data-kb="auto" title="On touch devices">Auto</button><button data-kb="on">On</button><button data-kb="off">Off</button>
         </div>
       </div>
     </section>
@@ -49,10 +49,10 @@
 
 <div class="main">
   <header class="topbar">
-    <button class="icon-btn" id="sbToggle" aria-controls="sidebar" title="Grupy znaków" aria-label="Pokaż lub ukryj grupy znaków">&#9776;</button>
-    <h1 class="brand">Trener Morse'a</h1>
+    <button class="icon-btn" id="sbToggle" aria-controls="sidebar" title="Character groups" aria-label="Show or hide character groups">&#9776;</button>
+    <h1 class="brand">Morse Trainer</h1>
     <nav class="tabs" role="tablist">
-      <button class="tab" data-mode="practice" role="tab">Trening</button>
+      <button class="tab" data-mode="practice" role="tab">Practice</button>
       <button class="tab" data-mode="test" role="tab">Test</button>
     </nav>
     <div class="active-info" id="activeInfo"></div>
@@ -60,7 +60,7 @@
   </header>
 
   <main class="content">
-    <!-- Tryb 1: trening – znak po znaku -->
+    <!-- Mode 1: practice – one character at a time -->
     <section id="practice" class="mode">
       <div class="card stage">
         <p class="status" id="pStatus"></p>
@@ -71,66 +71,66 @@
         <p class="note" id="pNote">&nbsp;</p>
         <div class="controls no-kb">
           <button class="btn primary wide" id="pStart">Start</button>
-          <button class="btn" id="pRepeat" disabled>Powtórz dźwięk</button>
+          <button class="btn" id="pRepeat" disabled>Replay sound</button>
         </div>
-        <p class="hint no-kb">Słuchaj i naciśnij na klawiaturze literę, którą słyszysz.
-          <kbd>Spacja</kbd> – start / powtórz, <kbd>Esc</kbd> – pauza.</p>
+        <p class="hint no-kb">Listen and press the letter you hear on your keyboard.
+          <kbd>Space</kbd> – start / replay, <kbd>Esc</kbd> – pause.</p>
       </div>
 
       <div class="card">
         <div class="stats">
-          <div class="stat ok"><span id="sOk">0</span><small>poprawne</small></div>
-          <div class="stat bad"><span id="sBad">0</span><small>błędne</small></div>
-          <div class="stat"><span id="sStreak">0</span><small>seria (rekord <b id="sBest">0</b>)</small></div>
-          <div class="stat"><span id="sAcc">–</span><small>skuteczność</small></div>
+          <div class="stat ok"><span id="sOk">0</span><small>correct</small></div>
+          <div class="stat bad"><span id="sBad">0</span><small>wrong</small></div>
+          <div class="stat"><span id="sStreak">0</span><small>streak (best <b id="sBest">0</b>)</small></div>
+          <div class="stat"><span id="sAcc">–</span><small>accuracy</small></div>
         </div>
         <div class="row-head">
-          <h3>Skuteczność liter w tej sesji</h3>
-          <button class="link-btn" id="sReset">Wyzeruj</button>
+          <h3>Letter accuracy this session</h3>
+          <button class="link-btn" id="sReset">Reset</button>
         </div>
         <div class="letter-stats" id="pLetterStats"></div>
       </div>
     </section>
 
-    <!-- Tryb 2: test – seria znaków, wynik na końcu -->
+    <!-- Mode 2: test – a series of characters, score at the end -->
     <section id="test" class="mode" hidden>
       <div class="card" id="tSetup">
-        <h2>Test słuchowy</h2>
-        <p class="muted">Program nada wybraną liczbę losowych znaków z zaznaczonych grup.
-          Zapisuj na bieżąco to, co słyszysz – wynik zobaczysz na końcu.</p>
+        <h2>Listening test</h2>
+        <p class="muted">The app sends the chosen number of random characters from the selected groups.
+          Write down what you hear as you go – you'll see your score at the end.</p>
         <div class="field">
-          <span class="field-label">Liczba znaków</span>
+          <span class="field-label">Number of characters</span>
           <div class="count-row">
             <div class="seg" id="tPresets">
               <button data-n="10">10</button><button data-n="20">20</button><button data-n="30">30</button><button data-n="50">50</button>
             </div>
-            <input class="num" type="number" id="tCount" min="1" max="200" aria-label="Własna liczba znaków">
+            <input class="num" type="number" id="tCount" min="1" max="200" aria-label="Custom number of characters">
           </div>
         </div>
         <label class="field slider">
-          <span class="field-label">Przerwa między znakami <output id="tGapOut"></output></span>
+          <span class="field-label">Gap between characters <output id="tGapOut"></output></span>
           <input type="range" id="tGap" min="0.5" max="4" step="0.1">
         </label>
-        <p class="warn" id="tWarn" hidden>Zaznacz co najmniej jedną grupę znaków w panelu po lewej.</p>
-        <div class="controls left"><button class="btn primary wide" id="tStart">Rozpocznij test</button></div>
+        <p class="warn" id="tWarn" hidden>Select at least one character group in the left panel.</p>
+        <div class="controls left"><button class="btn primary wide" id="tStart">Start test</button></div>
       </div>
 
       <div class="card" id="tRunCard" hidden>
         <div class="run-head">
-          <span id="tRunStatus">Przygotuj się…</span>
-          <span>Znak <b id="tCounter">0 / 0</b></span>
+          <span id="tRunStatus">Get ready…</span>
+          <span>Character <b id="tCounter">0 / 0</b></span>
         </div>
         <div class="progress"><div class="progress-bar" id="tBar"></div></div>
         <input id="tInput" class="copy-input no-kb" type="text" autocomplete="off" autocorrect="off"
-               autocapitalize="characters" spellcheck="false" placeholder="Wpisuj tutaj…" aria-label="Odebrane znaki">
+               autocapitalize="characters" spellcheck="false" placeholder="Type here…" aria-label="Received characters">
         <div class="copy-mirror kb-only" id="tMirror" aria-live="polite"></div>
-        <p class="hint">Wpisano: <b id="tTyped">0</b>.
-          <span class="no-kb">Nie rozpoznajesz znaku? Wciśnij <kbd>Spacja</kbd> – zapisze się „?”.
-          Po zakończeniu nadawania <kbd>Enter</kbd> pokaże wynik.</span>
-          <span class="kb-only">Nie rozpoznajesz znaku? Stuknij „?”. Po zakończeniu nadawania stuknij „Sprawdź”.</span></p>
+        <p class="hint">Typed: <b id="tTyped">0</b>.
+          <span class="no-kb">Not sure about a character? Press <kbd>Space</kbd> to enter “?”.
+          Once sending ends, <kbd>Enter</kbd> shows your score.</span>
+          <span class="kb-only">Not sure about a character? Tap “?”. Once sending ends, tap “Check”.</span></p>
         <div class="controls left">
-          <button class="btn" id="tAbort">Przerwij</button>
-          <button class="btn primary no-kb" id="tFinish" disabled>Sprawdź wynik</button>
+          <button class="btn" id="tAbort">Stop</button>
+          <button class="btn primary no-kb" id="tFinish" disabled>Check score</button>
         </div>
       </div>
 
@@ -143,28 +143,28 @@
             <p class="muted small" id="tSummary"></p>
           </div>
         </div>
-        <h3>Porównanie</h3>
-        <p class="muted small">Górny znak – nadany, dolny – Twoja odpowiedź. Kliknij kolumnę, żeby odsłuchać znak.</p>
+        <h3>Comparison</h3>
+        <p class="muted small">Top: the character sent, bottom: your answer. Click a column to hear the character.</p>
         <div class="cmp" id="tCmp"></div>
-        <h3>Błędy według liter</h3>
+        <h3>Mistakes by letter</h3>
         <div class="mistakes" id="tMistakes"></div>
         <div class="controls left">
-          <button class="btn primary" id="tNew">Nowy test</button>
-          <button class="btn" id="tRetry">Powtórz te same znaki</button>
-          <button class="btn" id="tBack">Zmień ustawienia</button>
+          <button class="btn primary" id="tNew">New test</button>
+          <button class="btn" id="tRetry">Repeat same characters</button>
+          <button class="btn" id="tBack">Change settings</button>
         </div>
       </div>
     </section>
   </main>
 </div>
 
-<!-- Klawiatura ekranowa (telefon / tablet) -->
+<!-- On-screen keyboard (phone / tablet) -->
 <div class="kb" id="kb" hidden>
   <div class="kb-inner">
     <div class="kb-bar">
       <span id="kbHint"></span>
       <div class="seg small" id="kbLayoutSeg">
-        <button data-layout="qwerty">QWERTY</button><button data-layout="abc" title="Tylko zaznaczone litery, duże klawisze">ABC</button>
+        <button data-layout="qwerty">QWERTY</button><button data-layout="abc" title="Selected letters only, big keys">ABC</button>
       </div>
     </div>
     <div id="kbKeys"></div>

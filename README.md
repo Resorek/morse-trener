@@ -1,25 +1,25 @@
-# Trener Morse'a
+# Morse Trainer
 
-Aplikacja w przeglądarce do nauki alfabetu Morse'a – bez instalacji, działa też na telefonie.
+A browser app for learning Morse code – no install, no build step, works on phones too.
 
-**Wersja online:** https://resorek.github.io/morse-trener/
+**Live version:** https://resorek.github.io/morse-trener/
 
-## Co potrafi
+## Features
 
-- **Grupy znaków** w wysuwanym panelu (lekcje 1–6: E T → I M S O → A N R W → D K G U → L P J B X C Y Z → Q F H V). Zaznaczasz, z których liter mają być losowane znaki; kliknięcie litery ją odtwarza.
-- **Trening** – program gra znak, a Ty naciskasz literę. Dobrze: zielono i następny znak. Źle: czerwono, pokazana i odtworzona prawidłowa litera. Statystyki i skuteczność każdej litery.
-- **Test** – wybierasz liczbę znaków i przerwę między nimi, zapisujesz, co słyszysz, a na końcu dostajesz wynik, porównanie znak po znaku i listę błędów.
-- **Telefon** – własna klawiatura ekranowa (QWERTY albo duże klawisze tylko z zaznaczonymi literami).
-- Jasny i ciemny motyw, regulacja prędkości (WPM), tonu i głośności. Ustawienia zapamiętują się w przeglądarce.
+- **Character groups** in a sliding sidebar (lessons 1–6: E T → I M S O → A N R W → D K G U → L P J B X C Y Z → Q F H V). Pick the lessons to draw characters from; click a letter to hear it.
+- **Practice** – the app plays a character and you press the letter. Correct: it lights up green and the next one follows. Wrong: it turns red, shows the correct letter and plays it again. Session stats and per-letter accuracy.
+- **Test** – choose how many characters and the gap between them, write down what you hear, and get a score, a character-by-character comparison and a list of mistakes at the end. A skipped character doesn't mark everything after it as wrong.
+- **Phone** – a built-in on-screen keyboard (QWERTY, or big keys with only the selected letters).
+- Light and dark theme (follows the system by default), adjustable speed (WPM), tone and volume. Settings are remembered in the browser.
 
-## Uruchomienie lokalnie
+## Run locally
 
-Wystarczy otworzyć `index.html` w przeglądarce. Albo:
+Just open `index.html` in a browser. Or serve the folder:
 
 ```
 py -m http.server 3040
 ```
 
-i wejść na http://localhost:3040.
+and go to http://localhost:3040.
 
-Na iPhonie dźwięk nie zagra przy włączonym przełączniku wyciszenia.
+On an iPhone there's no sound while the silent switch is on.
